@@ -63,6 +63,13 @@ Para utilizar a aplicação siga esses passos:
 
 #### Modelos treinados com todas as características
 
+<style>
+  th, td {
+    padding: 8px;
+    text-align: center;
+  }
+</style>
+
 <table>
         <thead>
             <tr>
