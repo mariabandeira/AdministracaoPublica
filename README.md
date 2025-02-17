@@ -19,8 +19,7 @@ O objetivo deste projeto é desenvolver e avaliar um modelo de classificação q
   - [ ] Recurrent Neural Networks (RNN)
   - [ ] XGBoost
 - [ ] Refatoração da limpeza dos dados
-- [ ] Análise de impacto das melhores características
-- [ ]   
+- [ ] Análise de impacto das melhores características  
 
 ## 🗂️ Estrutura do Repositório
 
