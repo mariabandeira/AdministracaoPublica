@@ -8,6 +8,20 @@ Este repositório contém os códigos e recursos desenvolvidos para o projeto de
 
 O objetivo deste projeto é desenvolver e avaliar um modelo de classificação que possa prever se uma família se enquadra como beneficiária do Bolsa Família com base em um conjunto de dados desindetificado com informações a respeito do Cadastro Único.
 
+## 📝 Atividades Propostas
+
+- [x] Coleta e organização dos dados
+- [x] Pré-processamento dos dados 
+- [ ] Desenvolvimento de modelos de Machine Learning
+  - [x] Random Forest
+  - [x] Suport Vector Machine (SVM)
+  - [x] K-Nearest Neighbors (KNN)
+  - [ ] Recurrent Neural Networks (RNN)
+  - [ ] XGBoost
+- [ ] Refatoração da limpeza dos dados
+- [ ] Análise de impacto das melhores características
+- [ ]   
+
 ## 🗂️ Estrutura do Repositório
 
 O repositório está dividido em pastas relacionadas as entregas solicitadas em cada etapa do projeto, seguindo a seguinte estruturação:
@@ -165,6 +179,116 @@ Para utilizar a aplicação siga esses passos:
                 <td>0.96</td>
                 <td>0.87</td>
                 <td>0.91</td>
+            </tr>
+        </tbody>
+</table>
+
+### 🦈 Resultados PB
+
+#### Modelos treinados com todas as características
+
+<table>
+        <thead>
+            <tr>
+                <th rowspan="2">Modelo</th>
+                <th rowspan="2">Acurácia</th>
+                <th colspan="2">Precisão</th>
+                <th colspan="2">Recall</th>
+                <th colspan="2">F1-Score</th>
+            </tr>
+            <tr>
+                <th>Classe 0</th>
+                <th>Classe 1</th>
+                <th>Classe 0</th>
+                <th>Classe 1</th>
+                <th>Classe 0</th>
+                <th>Classe 1</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>KNN</td>
+                <td>87%</td>
+                <td>0.87</td>
+                <td>0.87</td>
+                <td>0.74</td>
+                <td>0.94</td>
+                <td>0.80</td>
+                <td>0.90</td>
+            </tr>
+            <tr>
+                <td>SVM</td>
+                <td>90%</td>
+                <td>0.91</td>
+                <td>0.90</td>
+                <td>0.80</td>
+                <td>0.96</td>
+                <td>0.85</td>
+                <td>0.93</td>
+            </tr>
+            <tr>
+                <td>RF</td>
+                <td>91%</td>
+                <td>0.94</td>
+                <td>0.89</td>
+                <td>0.78</td>
+                <td>0.97</td>
+                <td>0.85</td>
+                <td>0.93</td>
+            </tr>
+        </tbody>
+</table>
+
+#### Modelos treinados com as melhores características
+
+<table>
+        <thead>
+            <tr>
+                <th rowspan="2">Modelo</th>
+                <th rowspan="2">Acurácia</th>
+                <th colspan="2">Precisão</th>
+                <th colspan="2">Recall</th>
+                <th colspan="2">F1-Score</th>
+            </tr>
+            <tr>
+                <th>Classe 0</th>
+                <th>Classe 1</th>
+                <th>Classe 0</th>
+                <th>Classe 1</th>
+                <th>Classe 0</th>
+                <th>Classe 1</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>KNN</td>
+                <td>70%</td>
+                <td>0.54</td>
+                <td>0.92</td>
+                <td>0.90</td>
+                <td>0.58</td>
+                <td>0.68</td>
+                <td>0.71</td>
+            </tr>
+            <tr>
+                <td>SVM</td>
+                <td>90%</td>
+                <td>0.93</td>
+                <td>0.89</td>
+                <td>0.78</td>
+                <td>0.97</td>
+                <td>0.85</td>
+                <td>0.93</td>
+            </tr>
+            <tr>
+                <td>RF</td>
+                <td>90%</td>
+                <td>0.92</td>
+                <td>0.89</td>
+                <td>0.79</td>
+                <td>0.96</td>
+                <td>0.85</td>
+                <td>0.93</td>
             </tr>
         </tbody>
 </table>
