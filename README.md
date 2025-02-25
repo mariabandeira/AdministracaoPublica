@@ -11,7 +11,7 @@ O objetivo deste projeto é desenvolver e avaliar um modelo de classificação q
 ## 📝 Atividades Propostas
 
 - [x] Coleta e organização dos dados
-- [x] Pré-processamento dos dados 
+- [x] Pré-processamento dos dados
 - [ ] Desenvolvimento de modelos de Machine Learning
   - [x] Random Forest
   - [x] Suport Vector Machine (SVM)
@@ -19,7 +19,7 @@ O objetivo deste projeto é desenvolver e avaliar um modelo de classificação q
   - [ ] Recurrent Neural Networks (RNN)
   - [ ] XGBoost
 - [ ] Refatoração da limpeza dos dados
-- [ ] Análise de impacto das melhores características  
+- [ ] Análise de impacto das melhores características
 
 ## 🗂️ Estrutura do Repositório
 
@@ -125,6 +125,16 @@ Para utilizar a aplicação siga esses passos:
                 <td>0.88</td>
                 <td>0.91</td>
             </tr>
+            <tr>
+                <td>XGBoost</td>
+                <td>90%</td>
+                <td>0.93</td>
+                <td>0.88</td>
+                <td>0.83</td>
+                <td>0.95</td>
+                <td>0.97</td>
+                <td>0.91</td>
+            </tr>
         </tbody>
 </table>
 
@@ -176,6 +186,16 @@ Para utilizar a aplicação siga esses passos:
                 <td>0.87</td>
                 <td>0.82</td>
                 <td>0.96</td>
+                <td>0.87</td>
+                <td>0.91</td>
+            </tr>
+            <tr>
+                <td>XGBoost</td>
+                <td>90%</td>
+                <td>0.93</td>
+                <td>0.88</td>
+                <td>0.82</td>
+                <td>0.95</td>
                 <td>0.87</td>
                 <td>0.91</td>
             </tr>
