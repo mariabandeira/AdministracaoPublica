@@ -120,9 +120,9 @@ Para utilizar a aplicação siga esses passos:
                 <td>90%</td>
                 <td>0.94</td>
                 <td>0.87</td>
-                <td>0.81</td>
+                <td>0.82</td>
                 <td>0.96</td>
-                <td>0.88</td>
+                <td>0.87</td>
                 <td>0.91</td>
             </tr>
             <tr>
@@ -182,8 +182,8 @@ Para utilizar a aplicação siga esses passos:
             <tr>
                 <td>RF</td>
                 <td>90%</td>
-                <td>0.94</td>
-                <td>0.87</td>
+                <td>0.93</td>
+                <td>0.88</td>
                 <td>0.82</td>
                 <td>0.96</td>
                 <td>0.87</td>
