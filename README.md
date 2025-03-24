@@ -42,6 +42,9 @@ projeto-administracao-publica
 │  ├─ SVM/
 │  │  ├─ TrainningPB.ipynb
 │  │  └─ TrainningRN.ipynb
+│  ├─ XGBoost/
+│  │  ├─ TrainningPB.ipynb
+│  │  └─ TrainningRN.ipynb
 │  ├─ cadunico_2018.ipynb
 │  └─ cadunico_2018.ipynb
 ├─ NovoBolsaFamiliaTransparencia/
@@ -74,7 +77,7 @@ Para utilizar a aplicação siga esses passos:
 
 ### 🤖 Técinicas de Machine Learning
 
-Neste projeto, utilizamos diferentes algoritmos de Machine Learning para a predição de diabetes, avaliando sua performance em um conjunto de dados contendo atributos de saúde dos pacientes. As técnicas aplicadas incluem:
+Neste projeto, utilizamos diferentes algoritmos de Machine Learning. As técnicas aplicadas incluem:
 
 - Random Forest (RF): um modelo baseado em árvores de decisão que utiliza um conjunto de árvores para melhorar a precisão da predição e reduzir o overfitting;
 - Support Vector Machine (SVM): algoritmo que busca um hiperplano ótimo para separar as classes no espaço de características, sendo eficaz especialmente para problemas com dados não linearmente separáveis;
