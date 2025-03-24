@@ -17,7 +17,7 @@ O objetivo deste projeto é desenvolver e avaliar um modelo de classificação q
   - [x] Suport Vector Machine (SVM)
   - [x] K-Nearest Neighbors (KNN)
   - [ ] Recurrent Neural Networks (RNN)
-  - [ ] XGBoost
+  - [x] XGBoost
 - [ ] Refatoração da limpeza dos dados
 - [ ] Análise de impacto das melhores características
 
@@ -71,6 +71,15 @@ Para utilizar a aplicação siga esses passos:
 - iii. Execute os Jupyters Notebooks.
 
 ## ⭐ Resultados
+
+### 🤖 Técinicas de Machine Learning
+
+Neste projeto, utilizamos diferentes algoritmos de Machine Learning para a predição de diabetes, avaliando sua performance em um conjunto de dados contendo atributos de saúde dos pacientes. As técnicas aplicadas incluem:
+
+- Random Forest (RF): um modelo baseado em árvores de decisão que utiliza um conjunto de árvores para melhorar a precisão da predição e reduzir o overfitting;
+- Support Vector Machine (SVM): algoritmo que busca um hiperplano ótimo para separar as classes no espaço de características, sendo eficaz especialmente para problemas com dados não linearmente separáveis;
+- K-Nearest Neighbors (KNN): método baseado na proximidade entre os dados, classificando um novo ponto com base nas classes dos seus vizinhos mais próximos;
+- XGBoost: uma técnica avançada de boosting que melhora a precisão e eficiência computacional, sendo amplamente utilizada para competições e aplicações do mundo real.
 
 ### 🐘 Resultados RN
 
@@ -255,6 +264,16 @@ Para utilizar a aplicação siga esses passos:
                 <td>0.85</td>
                 <td>0.93</td>
             </tr>
+            <tr>
+                <td>XGBoost</td>
+                <td>87%</td>
+                <td>0.87</td>
+                <td>0.86</td>
+                <td>0.77</td>
+                <td>0.93</td>
+                <td>0.82</td>
+                <td>0.90</td>
+            </tr>
         </tbody>
 </table>
 
@@ -308,6 +327,16 @@ Para utilizar a aplicação siga esses passos:
                 <td>0.96</td>
                 <td>0.85</td>
                 <td>0.93</td>
+            </tr>
+            <tr>
+                <td>XGBoost</td>
+                <td>87%</td>
+                <td>0.88</td>
+                <td>0.86</td>
+                <td>0.76</td>
+                <td>0.93</td>
+                <td>0.82</td>
+                <td>0.90</td>
             </tr>
         </tbody>
 </table>
