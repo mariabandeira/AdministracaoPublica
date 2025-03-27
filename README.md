@@ -86,6 +86,25 @@ Neste projeto, utilizamos diferentes algoritmos de Machine Learning. As técnica
 
 ### 🐘 Resultados RN
 
+No contexto do Rio Grande do Norte, foi utilizada uma amostra com 336.639 registros com um toltal de 31 colunas. Os dados foram processados, resultando na remoção de colunas com uma alta quantidade de valores ausentes, ou que não se encontravam em um formato adequado para o treinamento de modelos de ML (como colunas com datas, por exemplo), além disso, registros duplicados também foram removidos, visando uma melhoria do processo de treinamento. A partir disso, a amostra resultante apresentou `296.062 registros` e um total de `16 colunas`, as quais incluem:
+
+- `classif`;
+- `vlr_renda_media_fam`;
+- `cod_local_domic_fam`;
+- `qtd_comodos_domic_fam`;
+- `qtd_comodos_dormitorio_fam`;
+- `cod_material_piso_fam`;
+- `cod_material_domic_fam`;
+- `cod_agua_canalizada_fam`;
+- `cod_abaste_agua_domic_fam`;
+- `cod_banheiro_domic_fam`;
+- `cod_destino_lixo_domic_fam`;
+- `cod_iluminacao_domic_fam `;
+- `cod_calcamento_domic_fam`;
+- `ind_familia_quilombola_fam`;
+- `marc_pbf`;
+- `qtde_pessoas`;
+
 #### Modelos treinados com todas as características
 
 <table>
