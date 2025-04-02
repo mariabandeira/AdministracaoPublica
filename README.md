@@ -166,6 +166,16 @@ No contexto do Rio Grande do Norte, foi utilizada uma amostra com 336.639 regist
                 <td>0.97</td>
                 <td>0.91</td>
             </tr>
+            <tr>
+                <td>RNN</td>
+                <td>89%</td>
+                <td>0.91</td>
+                <td>0.88</td>
+                <td>0.83</td>
+                <td>0.94</td>
+                <td>0.87</td>
+                <td>0.91</td>
+            </tr>
         </tbody>
 </table>
 
@@ -226,6 +236,16 @@ No contexto do Rio Grande do Norte, foi utilizada uma amostra com 336.639 regist
                 <td>0.93</td>
                 <td>0.88</td>
                 <td>0.82</td>
+                <td>0.95</td>
+                <td>0.87</td>
+                <td>0.91</td>
+            </tr>
+          <tr>
+                <td>RNN</td>
+                <td>90%</td>
+                <td>0.92</td>
+                <td>0.88</td>
+                <td>0.83</td>
                 <td>0.95</td>
                 <td>0.87</td>
                 <td>0.91</td>
