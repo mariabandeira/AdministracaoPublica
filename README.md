@@ -337,6 +337,16 @@ No contexto da Paríba, foi utilizada uma amostra com 435.656 registros com um t
                 <td>0.82</td>
                 <td>0.90</td>
             </tr>
+           <tr>
+                <td>RNN</td>
+                <td>87%</td>
+                <td>0.88</td>
+                <td>0.86</td>
+                <td>0.76</td>
+                <td>0.93</td>
+                <td>0.81</td>
+                <td>0.89</td>
+            </tr>
         </tbody>
 </table>
 
@@ -399,6 +409,16 @@ No contexto da Paríba, foi utilizada uma amostra com 435.656 registros com um t
                 <td>0.76</td>
                 <td>0.93</td>
                 <td>0.82</td>
+                <td>0.90</td>
+            </tr>
+           <tr>
+                <td>RNN</td>
+                <td>87%</td>
+                <td>0.89</td>
+                <td>0.86</td>
+                <td>0.75</td>
+                <td>0.94</td>
+                <td>0.81</td>
                 <td>0.90</td>
             </tr>
         </tbody>
