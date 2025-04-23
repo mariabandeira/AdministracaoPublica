@@ -299,13 +299,13 @@ No contexto da Paríba, foi utilizada uma amostra com 435.656 registros com um t
         <tbody>
             <tr>
                 <td>KNN</td>
-                <td>87%</td>
-                <td>0.87</td>
-                <td>0.87</td>
-                <td>0.74</td>
-                <td>0.94</td>
-                <td>0.80</td>
-                <td>0.90</td>
+                <td>82%</td>
+                <td>0.82</td>
+                <td>0.82</td>
+                <td>0.68</td>
+                <td>0.91</td>
+                <td>0.75</td>
+                <td>0.86</td>
             </tr>
             <tr>
                 <td>SVM</td>
@@ -319,13 +319,13 @@ No contexto da Paríba, foi utilizada uma amostra com 435.656 registros com um t
             </tr>
             <tr>
                 <td>RF</td>
-                <td>91%</td>
+                <td>87%</td>
+                <td>0.90</td>
+                <td>0.86</td>
+                <td>0.75</td>
                 <td>0.94</td>
-                <td>0.89</td>
-                <td>0.78</td>
-                <td>0.97</td>
-                <td>0.85</td>
-                <td>0.93</td>
+                <td>0.82</td>
+                <td>0.90</td>
             </tr>
             <tr>
                 <td>XGBoost</td>
@@ -373,13 +373,13 @@ No contexto da Paríba, foi utilizada uma amostra com 435.656 registros com um t
         <tbody>
             <tr>
                 <td>KNN</td>
-                <td>70%</td>
-                <td>0.54</td>
-                <td>0.92</td>
-                <td>0.90</td>
-                <td>0.58</td>
-                <td>0.68</td>
+                <td>80%</td>
                 <td>0.71</td>
+                <td>0.88</td>
+                <td>0.83</td>
+                <td>0.78</td>
+                <td>0.76</td>
+                <td>0.83</td>
             </tr>
             <tr>
                 <td>SVM</td>
@@ -393,13 +393,13 @@ No contexto da Paríba, foi utilizada uma amostra com 435.656 registros com um t
             </tr>
             <tr>
                 <td>RF</td>
-                <td>90%</td>
-                <td>0.92</td>
-                <td>0.89</td>
-                <td>0.79</td>
-                <td>0.96</td>
+                <td>85%</td>
+                <td>0.86</td>
                 <td>0.85</td>
-                <td>0.93</td>
+                <td>0.74</td>
+                <td>0.92</td>
+                <td>0.80</td>
+                <td>0.89</td>
             </tr>
             <tr>
                 <td>XGBoost</td>
