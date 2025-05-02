@@ -86,7 +86,7 @@ Neste projeto, utilizamos diferentes algoritmos de Machine Learning. As técnica
 
 ### 🐘 Resultados RN
 
-No contexto do Rio Grande do Norte, foi utilizada uma amostra com 336.639 registros com um toltal de 31 colunas. Os dados foram processados, resultando na remoção de colunas com uma alta quantidade de valores ausentes, ou que não se encontravam em um formato adequado para o treinamento de modelos de ML (como colunas com datas, por exemplo), além disso, registros duplicados também foram removidos, visando uma melhoria do processo de treinamento. A partir disso, a amostra resultante apresentou `296.062 registros` e um total de `16 colunas`, as quais incluem:
+No contexto do Rio Grande do Norte, foi utilizada uma amostra com 336.639 registros com um toltal de 31 colunas. Os dados foram processados, resultando na remoção de colunas com uma alta quantidade de valores ausentes, ou que não se encontravam em um formato adequado para o treinamento de modelos de ML (como colunas com datas, por exemplo), além disso, registros duplicados também foram removidos, visando uma melhoria do processo de treinamento. A partir disso, a amostra resultante apresentou `179.358 registros` e um total de `16 colunas`, as quais incluem:
 
 - `classif`;
 - `vlr_renda_media_fam`;
@@ -163,7 +163,7 @@ No contexto do Rio Grande do Norte, foi utilizada uma amostra com 336.639 regist
                 <td>0.88</td>
                 <td>0.83</td>
                 <td>0.95</td>
-                <td>0.97</td>
+                <td>0.87</td>
                 <td>0.91</td>
             </tr>
             <tr>
@@ -260,7 +260,7 @@ No contexto da Paríba, foi utilizada uma amostra com 435.656 registros com um t
 - `classf`;
 - `vlr_renda_media_fam`;
 - `cod_local_domic_fam`;
-- `cod_especie_domic_fam`;       
+- `cod_especie_domic_fam`;
 - `qtd_comodos_domic_fam`;
 - `qtd_comodos_dormitorio_fam`;
 - `cod_material_piso_fam`;
