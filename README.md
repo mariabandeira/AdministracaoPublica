@@ -73,6 +73,12 @@ Para utilizar a aplicação siga esses passos:
 
 - iii. Execute os Jupyters Notebooks.
 
+- iv. Abra a pasta MLApi em seu terminal.
+
+- v. Rode a API com o comando:
+
+  > python app.py
+
 ## ⭐ Resultados
 
 ### 🤖 Técinicas de Machine Learning
