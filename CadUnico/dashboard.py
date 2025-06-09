@@ -170,7 +170,7 @@ if pagina == "Características Domiciliares":
     col1, col2, col3 = st.columns(3)
     for i, (titulo, coluna) in enumerate(colunas_categorias.items()):
         graf = px.histogram(cad_filtro, x=coluna, title=titulo)
-        graf.update_layout(height=250, margin=dict(t=30, b=0))
+        graf.update_layout(height=400, width=500, margin=dict(t=50, b=40))
         [col1, col2, col3][i % 3].plotly_chart(graf, use_container_width=True)
 
     st.subheader("Quantidade de cômodos por ano")
