@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-alt.themes.enable("dark")
+alt.theme.enable("dark")
 
 cadunico_rn = pd.read_csv("C:/Users/luizf/Desktop/AdministracaoPublica/CadUnico/BasesRN/cadunico_rn_clean.csv", sep=';', low_memory=False)
 cadunico_rn = cadunico_rn[cadunico_rn['ano'].isin(range(2012, 2019))]
