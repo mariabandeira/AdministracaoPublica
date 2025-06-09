@@ -104,7 +104,7 @@ if pagina == "Mapa e Indicadores":
 if pagina == "Características Domiciliares":
     if municipio_nome:
         st.subheader(f"Município selecionado: {municipio_nome}")
-        
+
     st.subheader(f"Características dos Domicílios - {selected_year}")
     if cd_ibge_clicked:
         cad_filtro = cadunico_rn[(cadunico_rn['cd_ibge'] == int(cd_ibge_clicked)) & (cadunico_rn['ano'] == selected_year)]
@@ -119,6 +119,53 @@ if pagina == "Características Domiciliares":
         "Forma de Escoamento": 'cod_escoa_sanitario_domic_fam',
         "Espécie do domicílio": 'cod_especie_domic_fam'
     }
+
+    mapeamentos = {
+        'cod_destino_lixo_domic_fam': {
+            1: "Coletado diretamente",
+            2: "Coletado indiretamente",
+            3: "Queimado ou enterrado",
+            4: "Jogado em terreno baldio",
+            5: "Jogado em rio ou mar",
+            6: "Outro destino"
+        },
+        'cod_iluminacao_domic_fam': {
+            1: "Elétrica com medidor próprio",
+            2: "Elétrica com medidor comunitário",
+            3: "Elétrica sem medidor",
+            4: "Óleo, querosene ou gás",
+            5: "Vela",
+            6: "Outra forma"
+        },
+        'cod_calcamento_domic_fam': {
+            1: "Total",
+            2: "Parcial",
+            3: "Não existe"
+        },
+        'cod_abaste_agua_domic_fam': {
+            1: "Rede geral",
+            2: "Poço ou nascente",
+            3: "Cisterna",
+            4: "Outra forma"
+        },
+        'cod_escoa_sanitario_domic_fam': {
+            1: "Rede coletora",
+            2: "Fossa séptica",
+            3: "Fossa rudimentar",
+            4: "Vala a céu aberto",
+            5: "Direto para um rio, lago ou mar",
+            6: "Outra forma"
+        },
+        'cod_especie_domic_fam': {
+            1: "Particular Permanente",
+            2: "Particular improvisado",
+            3: "Coletivo"
+        }
+    }
+
+    for coluna, mapeamento in mapeamentos.items():
+        if coluna in cad_filtro.columns:
+            cad_filtro[coluna] = cad_filtro[coluna].replace(mapeamento)
 
     col1, col2, col3 = st.columns(3)
     for i, (titulo, coluna) in enumerate(colunas_categorias.items()):
