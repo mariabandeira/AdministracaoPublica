@@ -16,7 +16,7 @@ st.set_page_config(
 
 alt.theme.enable("dark")
 
-cadunico_rn = pd.read_csv("/workspaces/AdministracaoPublica/CadUnico/BasesRN/cadunico_rn_clean.csv", sep=';', low_memory=False)
+cadunico_rn = pd.read_csv("C:/Users/luizf/Desktop/AdministracaoPublica/CadUnico/BasesRN/cadunico_rn_clean.csv", sep=';', low_memory=False)
 cadunico_rn = cadunico_rn[cadunico_rn['ano'].isin(range(2012, 2019))]
 
 url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/refs/heads/master/geojson/geojs-24-mun.json'
@@ -162,8 +162,8 @@ if pagina == "Características Domiciliares":
         st.subheader(f"Município selecionado: {municipio_nome}")
 
     st.subheader(f"Características dos Domicílios - {selected_year}")
-    if cd_ibge_clicked:
-        cad_filtro = cadunico_rn[(cadunico_rn['cd_ibge'] == int(cd_ibge_clicked)) & (cadunico_rn['ano'] == selected_year)]
+    if cd_ibge_final:
+        cad_filtro = cadunico_rn[(cadunico_rn['cd_ibge'] == int(cd_ibge_final)) & (cadunico_rn['ano'] == selected_year)]
     else:
         cad_filtro = cadunico_rn[cadunico_rn['ano'] == selected_year]
 
