@@ -16,7 +16,7 @@ st.set_page_config(
 
 alt.theme.enable("dark")
 
-cadunico_rn = pd.read_csv("C:/Users/luizf/Desktop/AdministracaoPublica/CadUnico/BasesRN/cadunico_rn_clean.csv", sep=';', low_memory=False)
+cadunico_rn = pd.read_csv("/home/erlon/AdministracaoPublica/CadUnico/BasesRN/cadunico_rn_clean.csv", sep=';', low_memory=False)
 cadunico_rn = cadunico_rn[cadunico_rn['ano'].isin(range(2012, 2019))]
 
 url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/refs/heads/master/geojson/geojs-24-mun.json'
@@ -89,8 +89,24 @@ def encontrar_municipio(lat, lon, geojson):
             return feature['properties']['name'], feature['properties']['id']
     return None, None
 
-# Exibir mapa e capturar clique
-mapa = st_folium(m, use_container_width=True, height=500)
+st.markdown("### Mapa de Beneficiários do Bolsa Família")
+st.markdown("Clique em um município para ver os indicadores.")
+
+# Create two columns with custom widths
+col1, col2 = st.columns([0.6, 0.4])
+
+# Display map in the first column
+with col1:
+    mapa = st_folium(m, use_container_width=True, height=500)
+
+# Display data information in the second column
+with col2:
+    
+    st.markdown("""
+    ### Sobre o Programa
+    O Bolsa Família é o principal programa de transferência de renda do Brasil, 
+    atendendo famílias em situação de pobreza e extrema pobreza.
+    """)
 
 # Clique no mapa tem prioridade
 click_data = mapa.get('last_clicked')
