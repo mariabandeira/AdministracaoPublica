@@ -103,10 +103,23 @@ with col1:
 with col2:
     
     st.markdown("""
-    ### Sobre o Programa
-    O Bolsa Família é o principal programa de transferência de renda do Brasil, 
-    atendendo famílias em situação de pobreza e extrema pobreza.
+    ### Sobre o Bolsa Família
+    O **Bolsa Família** é o principal programa de transferência de renda do Brasil, 
+    destinado a apoiar famílias em situação de pobreza e extrema pobreza. 
+    Ele busca garantir a elas acesso a direitos fundamentais, como saúde, educação, 
+    alimentação e segurança alimentar.
+
+    #### Beneficiários
+    O programa atende milhões de famílias em todo o país. Ao interagir com o mapa, 
+    você pode explorar como o programa está distribuído e qual o impacto em cada município.
     """)
+
+    st.markdown("""
+    ### Como funciona o programa?
+    - **Critérios de elegibilidade**: Famílias com renda per capita abaixo de um determinado valor.
+    - **Objetivos**: Erradicação da pobreza, inclusão social e melhoria nas condições de vida das famílias vulneráveis.
+    """)
+
 
 # Clique no mapa tem prioridade
 click_data = mapa.get('last_clicked')
@@ -115,6 +128,9 @@ if click_data:
 else:
     municipio_nome = selected_city if selected_city != "Todos os municípios" else None
     cd_ibge_final = cd_ibge_selected_sidebar
+
+CB_color_cycle = ['#377eb8', '#4daf4a', '#e41a1c', 
+                  '#dede00', '#a65628','#999999']
 
 
 # Página 1 - Mapa e Indicadores
@@ -241,14 +257,18 @@ if pagina == "Características Domiciliares":
 
     col1, col2, col3 = st.columns(3)
     for i, (titulo, coluna) in enumerate(colunas_categorias.items()):
-        graf = px.histogram(cad_filtro, x=coluna, title=titulo, color=coluna)
-        graf.update_layout(height=400, width=500, margin=dict(t=50, b=40))
+        graf = px.histogram(cad_filtro, x=coluna, title=titulo, color=coluna, color_discrete_sequence=CB_color_cycle)
+        graf.update_layout(height=400, width=500, margin=dict(t=50, b=40), legend_title_text="")
+        graf.update_xaxes(title=None)
+        graf.update_yaxes(title=None)
         [col1, col2, col3][i % 3].plotly_chart(graf, use_container_width=True)
 
     col1, col2 = st.columns(2)
     with col1:
         st.subheader("Quantidade de cômodos por ano")
         fig_comodos = px.histogram(cad_filtro, x='qtd_comodos_domic_fam', title='Qtd. de cômodos do domicílio')
+        fig_comodos.update_xaxes(title='Quantidade de cômodos')
+        fig_comodos.update_yaxes(title=None)
         st.plotly_chart(fig_comodos, use_container_width=True)
 
     with col2:
