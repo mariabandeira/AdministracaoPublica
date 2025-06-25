@@ -98,45 +98,48 @@ def encontrar_municipio(lat, lon, geojson):
             return feature['properties']['name'], feature['properties']['id']
     return None, None
 
-st.markdown("### Mapa de Beneficiários do Bolsa Família")
-st.markdown("Clique em um município para ver os indicadores.")
+def exibir_mapa():
+    st.markdown("### Mapa de Beneficiários do Bolsa Família")
+    st.markdown("Clique em um município para ver os indicadores.")
 
-# Create two columns with custom widths
-col1, col2 = st.columns([0.6, 0.4])
+    # Create two columns with custom widths
+    col1, col2 = st.columns([0.6, 0.4])
 
-# Display map in the first column
-with col1:
-    mapa = st_folium(m, use_container_width=True, height=500)
+    # Display map in the first column
+    with col1:
+        mapa = st_folium(m, use_container_width=True, height=500)
 
-# Display data information in the second column
-with col2:
-    
-    st.markdown("""
-    ### Sobre o Bolsa Família
-    O **Bolsa Família** é o principal programa de transferência de renda do Brasil, 
-    destinado a apoiar famílias em situação de pobreza e extrema pobreza. 
-    Ele busca garantir a elas acesso a direitos fundamentais, como saúde, educação, 
-    alimentação e segurança alimentar.
+    # Display data information in the second column
+    with col2:
+        
+        st.markdown("""
+        ### Sobre o Bolsa Família
+        O **Bolsa Família** é o principal programa de transferência de renda do Brasil, 
+        destinado a apoiar famílias em situação de pobreza e extrema pobreza. 
+        Ele busca garantir a elas acesso a direitos fundamentais, como saúde, educação, 
+        alimentação e segurança alimentar.
 
-    #### Beneficiários
-    O programa atende milhões de famílias em todo o país. Ao interagir com o mapa, 
-    você pode explorar como o programa está distribuído e qual o impacto em cada município.
-    """)
+        #### Beneficiários
+        O programa atende milhões de famílias em todo o país. Ao interagir com o mapa, 
+        você pode explorar como o programa está distribuído e qual o impacto em cada município.
+        """)
 
-    st.markdown("""
-    ### Como funciona o programa?
-    - **Critérios de elegibilidade**: Famílias com renda per capita abaixo de um determinado valor.
-    - **Objetivos**: Erradicação da pobreza, inclusão social e melhoria nas condições de vida das famílias vulneráveis.
-    """)
+        st.markdown("""
+        ### Como funciona o programa?
+        - **Critérios de elegibilidade**: Famílias com renda per capita abaixo de um determinado valor.
+        - **Objetivos**: Erradicação da pobreza, inclusão social e melhoria nas condições de vida das famílias vulneráveis.
+        """)
+    return mapa    
 
-
-# Clique no mapa tem prioridade
-click_data = mapa.get('last_clicked')
-if click_data:
-    municipio_nome, cd_ibge_final = encontrar_municipio(click_data['lat'], click_data['lng'], rn_geojson)
-else:
-    municipio_nome = selected_city if selected_city != "Todos os municípios" else None
-    cd_ibge_final = cd_ibge_selected_sidebar
+def get_municipio_selecionado(mapa, selected_city, cd_ibge_selected_sidebar):
+    # Se um município foi clicado no mapa, retorna o nome e o código IBGE
+    click_data = mapa.get('last_clicked')
+    if click_data:
+        municipio_nome, cd_ibge_final = encontrar_municipio(click_data['lat'], click_data['lng'], rn_geojson)
+    else:
+        municipio_nome = selected_city if selected_city != "Todos os municípios" else None
+        cd_ibge_final = cd_ibge_selected_sidebar
+    return municipio_nome, cd_ibge_final
 
 CB_color_cycle = ['#377eb8', '#4daf4a', '#e41a1c', 
                   '#dede00', '#a65628','#999999']
@@ -144,6 +147,9 @@ CB_color_cycle = ['#377eb8', '#4daf4a', '#e41a1c',
 
 # Página 1 - Mapa e Indicadores
 if pagina == "Mapa e Indicadores":
+    mapa = exibir_mapa()
+    municipio_nome, cd_ibge_final = get_municipio_selecionado(mapa, selected_city, cd_ibge_selected_sidebar)
+    
     if municipio_nome:
         st.subheader(f"Município selecionado: {municipio_nome}")
 
@@ -199,6 +205,9 @@ if pagina == "Mapa e Indicadores":
 
 # Página 2 - Gráficos de Características Domiciliares
 if pagina == "Características Domiciliares":
+    mapa = exibir_mapa()
+    municipio_nome, cd_ibge_final = get_municipio_selecionado(mapa, selected_city, cd_ibge_selected_sidebar)
+    
     if municipio_nome:
         st.subheader(f"Município selecionado: {municipio_nome}")
 
@@ -374,21 +383,26 @@ if pagina == "Predição com ML":
         'Não': 2,
     }
 
-    classf = st.selectbox("Classificação da Localização", options=list(classf_options.keys()))
-    vlr_renda_media_fam = st.number_input("Valor da renda média (per capita) da família", min_value=0.0, step=0.1)
-    cod_local_domic_fam = st.selectbox("Características do local onde está situado o domicílio", options=list(cod_local_domic_fam_options.keys()))
-    qtd_comodos_domic_fam = st.number_input('Quantidade de comodos do domicilio', min_value=0, max_value=30, value=4)
-    qtd_comodos_dormitorio_fam = st.number_input('Quantidade de comodos servindo como dormitório do domicilio', min_value=0, max_value=30, value=1)
-    cod_material_piso_fam = st.selectbox("Material predominante no piso do domicílio", options=list(cod_material_piso_fam_options.keys()))
-    cod_material_domic_fam = st.selectbox("Material predominante nas paredes externas do domicílio", options=list(cod_material_domic_fam_options.keys()))
-    cod_agua_canalizada_fam = st.selectbox("Domicílio tem água encanada", options=list(cod_agua_canalizada_fam_options.keys()))
-    cod_abaste_agua_domic_fam = st.selectbox("Forma de abastecimento de água", options=list(cod_abaste_agua_domic_fam_options.keys()))
-    cod_banheiro_domic_fam = st.selectbox("Existência de banheiro", options=list(cod_banheiro_domic_fam_options.keys()))
-    cod_destino_lixo_domic_fam = st.selectbox("Forma de coleta do lixo", options=list(cod_destino_lixo_domic_fam_options.keys()))
-    cod_iluminacao_domic_fam = st.selectbox("Tipo de iluminação", options=list(cod_iluminacao_domic_fam_options.keys()))
-    cod_calcamento_domic_fam = st.selectbox("Calçamento", options=list(cod_calcamento_domic_fam_options.keys()))
-    ind_familia_quilombola_fam = st.selectbox("Família quilombola", options=list(ind_familia_quilombola_fam_options.keys()))
-    qtde_pessoas = st.number_input('Quantidade de pessoas utilizada no cálculo da renda per capita familiar', min_value=0, max_value=30, value=4)
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        classf = st.selectbox("Classificação da Localização", options=list(classf_options.keys()))
+        vlr_renda_media_fam = st.number_input("Valor da renda média (per capita) da família", min_value=0.0, step=0.1)
+        cod_local_domic_fam = st.selectbox("Características do local onde está situado o domicílio", options=list(cod_local_domic_fam_options.keys()))
+        qtd_comodos_domic_fam = st.number_input('Quantidade de comodos do domicilio', min_value=0, max_value=30, value=4)
+        qtd_comodos_dormitorio_fam = st.number_input('Quantidade de comodos servindo como dormitório do domicilio', min_value=0, max_value=30, value=1)
+    with col2:
+        cod_material_piso_fam = st.selectbox("Material predominante no piso do domicílio", options=list(cod_material_piso_fam_options.keys()))
+        cod_material_domic_fam = st.selectbox("Material predominante nas paredes externas do domicílio", options=list(cod_material_domic_fam_options.keys()))
+        cod_agua_canalizada_fam = st.selectbox("Domicílio tem água encanada", options=list(cod_agua_canalizada_fam_options.keys()))
+        cod_abaste_agua_domic_fam = st.selectbox("Forma de abastecimento de água", options=list(cod_abaste_agua_domic_fam_options.keys()))
+        cod_banheiro_domic_fam = st.selectbox("Existência de banheiro", options=list(cod_banheiro_domic_fam_options.keys()))
+    with col3:
+        cod_destino_lixo_domic_fam = st.selectbox("Forma de coleta do lixo", options=list(cod_destino_lixo_domic_fam_options.keys()))
+        cod_iluminacao_domic_fam = st.selectbox("Tipo de iluminação", options=list(cod_iluminacao_domic_fam_options.keys()))
+        cod_calcamento_domic_fam = st.selectbox("Calçamento", options=list(cod_calcamento_domic_fam_options.keys()))
+        ind_familia_quilombola_fam = st.selectbox("Família quilombola", options=list(ind_familia_quilombola_fam_options.keys()))
+        qtde_pessoas = st.number_input('Quantidade de pessoas utilizada no cálculo da renda per capita familiar', min_value=0, max_value=30, value=4)
+
 
     if st.button("Fazer Predição"):
         entrada = [[
