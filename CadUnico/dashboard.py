@@ -217,6 +217,12 @@ if pagina == "Predição com ML":
 
     st.markdown("Preencha os dados abaixo para prever se tem acesso ou não ao Bolsa Família:")
 
+    st.markdown("""
+    <span style='font-size:14px; user-select:none;'><em>
+    O modelo de Machine Learning utilizado foi o xgboost, treinado com dados do Cadastro Único (CadÚnico) dos anos entre 2016 e 2018.
+    </em></span>
+    """, unsafe_allow_html=True)
+
     classf_options = {
     'Capital': 1,
     'Região Metropolitana (RM) ou Região Integrada de Desenvolvimento (RIDE)': 2,
