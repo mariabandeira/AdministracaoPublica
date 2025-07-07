@@ -217,7 +217,7 @@ if pagina == "Mapa e Indicadores":
 
     #  cd_ibge_final para filtrar os dados
     if municipio_nome:
-        st.subheader(f"Município selecionado: {municipio_nome} - {estado}")
+        st.subheader(f"Município selecionado: {municipio_nome} ({cd_ibge_final}) - {estado}")
 
     if cd_ibge_final:
         cadunico_filtrado = cadunico[cadunico['cd_ibge'].astype(str) == str(cd_ibge_final)]
