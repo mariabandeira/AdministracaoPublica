@@ -37,6 +37,7 @@ st.markdown("""
 
 load_dotenv()
 model_path = os.getenv("MODEL_PATH")
+model_path_reduced = os.getenv("MODEL_PATH_REDUCED")
 
 # Seletor de estado
 st.sidebar.title("👪 Painel de Informações Bolsa Família")
@@ -75,7 +76,7 @@ selected_city = st.sidebar.selectbox(
     index=nomes_cidades.index(selected_city) if selected_city in nomes_cidades else 0,
     key="selected_city"
 )
-pagina = st.sidebar.radio("Selecione a página", ["Mapa e Indicadores", "Características Domiciliares", "Predição com ML"])
+pagina = st.sidebar.radio("Selecione a página", ["Mapa e Indicadores", "Características Domiciliares", "Predição com ML", "Predição com ML (2)"])
 
 if selected_city != "Todos os municípios":
     cd_ibge_selected_sidebar = next(
@@ -492,6 +493,76 @@ if pagina == "Predição com ML":
             cod_iluminacao_domic_fam_options[cod_iluminacao_domic_fam],
             cod_calcamento_domic_fam_options[cod_calcamento_domic_fam],
             ind_familia_quilombola_fam_options[ind_familia_quilombola_fam],
+            qtde_pessoas
+        ]]
+        predicao = modelo.predict(entrada)[0]
+        probas = modelo.predict_proba(entrada)[0]
+
+        st.success(f"Resultado da Predição: **{'Não apto a receber' if predicao == 0 else 'Apto a receber'}**")    
+
+# Página 3 - Predição com ML reduzido
+if pagina == "Predição com ML (2)":
+    st.subheader("Predição com Modelo de Machine Learning")
+
+    st.markdown("Preencha os dados abaixo para prever se tem acesso ou não ao Bolsa Família:")
+
+    st.markdown("""
+    <span style='font-size:14px; user-select:none;'><em>
+    O modelo de Machine Learning utilizado foi o xgboost, treinado com dados do Cadastro Único (CadÚnico) dos anos entre 2016 e 2018.
+    </em></span>
+    """, unsafe_allow_html=True)
+
+    cod_material_piso_fam_options = {
+        'Terra': 1,
+        'Cimento': 2,
+        'Madeira aproveitada': 3,
+        'Madeira aparelhada': 4,
+        'Cerâmica, lajota ou pedra': 5,
+        'Carpete': 6,
+        'Outro material': 7
+    }
+
+    cod_agua_canalizada_fam_options = {
+        'Sim': 1,
+        'Não': 2,
+    }
+
+    cod_abaste_agua_domic_fam_options = {
+        'Rede geral de distribuição': 1,
+        'Poço ou nascente': 2,
+        'Cisterna': 3,
+        'Outra forma': 4
+    }
+
+    cod_calcamento_domic_fam_options = {
+        'Total': 1,
+        'Parcial': 2,
+        'Não existe': 3,
+    }
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        vlr_renda_media_fam = st.number_input("Valor da renda média (per capita) da família", min_value=0.0, step=0.1)
+        qtd_comodos_domic_fam = st.number_input('Quantidade de comodos do domicilio', min_value=0, max_value=30, value=4)
+        cod_material_piso_fam = st.selectbox("Material predominante no piso do domicílio", options=list(cod_material_piso_fam_options.keys()))
+    with col2:
+        cod_agua_canalizada_fam = st.selectbox("Domicílio tem água encanada", options=list(cod_agua_canalizada_fam_options.keys()))
+        cod_abaste_agua_domic_fam = st.selectbox("Forma de abastecimento de água", options=list(cod_abaste_agua_domic_fam_options.keys()))
+    with col3:
+        cod_calcamento_domic_fam = st.selectbox("Calçamento", options=list(cod_calcamento_domic_fam_options.keys()))
+        qtde_pessoas = st.number_input('Quantidade de pessoas utilizada no cálculo da renda per capita familiar', min_value=0, max_value=30, value=4)
+
+
+    if st.button("Fazer Predição"):
+        modelo = joblib.load(model_path_reduced)
+
+        entrada = [[
+            vlr_renda_media_fam,
+            qtd_comodos_domic_fam,
+            cod_material_piso_fam_options[cod_material_piso_fam],
+            cod_agua_canalizada_fam_options[cod_agua_canalizada_fam],
+            cod_abaste_agua_domic_fam_options[cod_abaste_agua_domic_fam],
+            cod_calcamento_domic_fam_options[cod_calcamento_domic_fam],
             qtde_pessoas
         ]]
         predicao = modelo.predict(entrada)[0]
