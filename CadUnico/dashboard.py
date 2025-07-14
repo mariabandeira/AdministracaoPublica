@@ -498,4 +498,3 @@ if pagina == "Predição com ML":
         probas = modelo.predict_proba(entrada)[0]
 
         st.success(f"Resultado da Predição: **{'Não apto a receber' if predicao == 0 else 'Apto a receber'}**")
-        st.info(f"Probabilidade: {probas[predicao]:.2%}")
