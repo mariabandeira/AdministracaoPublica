@@ -76,7 +76,7 @@ selected_city = st.sidebar.selectbox(
     index=nomes_cidades.index(selected_city) if selected_city in nomes_cidades else 0,
     key="selected_city"
 )
-pagina = st.sidebar.radio("Selecione a página", ["Mapa e Indicadores", "Características Domiciliares", "Predição com ML", "Predição com ML (2)"])
+pagina = st.sidebar.radio("Selecione a página", ["Mapa e Indicadores", "Características Domiciliares", "Predição com ML"])
 
 if selected_city != "Todos os municípios":
     cd_ibge_selected_sidebar = next(
@@ -362,146 +362,10 @@ if pagina == "Características Domiciliares":
     with col2:
         banheiros = cad_filtro['cod_banheiro_domic_fam'].value_counts().rename({1: 'Sim', 2: 'Não'})
         fig_banheiro = px.pie(names=banheiros.index, values=banheiros.values, title="Distribuição de domicílios com banheiro")
-        st.plotly_chart(fig_banheiro, use_container_width=True)
-
-# Página 3 - Predição com ML
-if pagina == "Predição com ML":
-    st.subheader("Predição com Modelo de Machine Learning")
-
-    st.markdown("Preencha os dados abaixo para prever se tem acesso ou não ao Bolsa Família:")
-
-    st.markdown("""
-    <span style='font-size:14px; user-select:none;'><em>
-    O modelo de Machine Learning utilizado foi o xgboost, treinado com dados do Cadastro Único (CadÚnico) dos anos entre 2016 e 2018.
-    </em></span>
-    """, unsafe_allow_html=True)
-
-    classf_options = {
-    'Capital': 1,
-    'Região Metropolitana (RM) ou Região Integrada de Desenvolvimento (RIDE)': 2,
-    'Outros': 3
-    }
-
-    cod_local_domic_fam_options = {
-        'Urbanas': 1,
-        'Rurais': 2
-    }
-
-    cod_material_piso_fam_options = {
-        'Terra': 1,
-        'Cimento': 2,
-        'Madeira aproveitada': 3,
-        'Madeira aparelhada': 4,
-        'Cerâmica, lajota ou pedra': 5,
-        'Carpete': 6,
-        'Outro material': 7
-    }
-
-    cod_material_domic_fam_options = {
-        'Alvenaria/tijolo com revestimento': 1,
-        'Alvenaria/tijolo sem revestiment': 2,
-        'Madeira aparelhada': 3,
-        'Taipa revestida': 4,
-        'Taipa não revestida': 5,
-        'Madeira aproveitada': 6,
-        'Palha': 7,
-        'Outro material': 8
-    }
-
-    cod_agua_canalizada_fam_options = {
-        'Sim': 1,
-        'Não': 2,
-    }
-
-    cod_abaste_agua_domic_fam_options = {
-        'Rede geral de distribuição': 1,
-        'Poço ou nascente': 2,
-        'Cisterna': 3,
-        'Outra forma': 4
-    }
-
-    cod_banheiro_domic_fam_options = {
-        'Sim': 1,
-        'Não': 2,
-    }
-
-    cod_destino_lixo_domic_fam_options = {
-        'É coletado diretamente': 1,
-        'É coletado indiretamente': 2,
-        'É queimado ou enterrado na propriedade': 3,
-        'É jogado em terreno baldio ou logradouro (rua, avenida, etc.)': 4,
-        'É jogado em rio ou mar': 5,
-        'Tem outro destino': 6
-    }
-
-    cod_iluminacao_domic_fam_options = {
-        'Elétrica com medidor próprio': 1,
-        'Elétrica com medidor comunitário': 2,
-        'Elétrica sem medidor': 3,
-        'Óleo, querosene ou gás': 4,
-        'Vela': 5,
-        'Outra forma': 6
-    }
-
-    cod_calcamento_domic_fam_options = {
-        'Total': 1,
-        'Parcial': 2,
-        'Não existe': 3,
-    }
-
-    ind_familia_quilombola_fam_options = {
-        'Sim': 1,
-        'Não': 2,
-    }
-
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        classf = st.selectbox("Classificação da Localização", options=list(classf_options.keys()))
-        vlr_renda_media_fam = st.number_input("Valor da renda média (per capita) da família", min_value=0.0, step=0.1)
-        cod_local_domic_fam = st.selectbox("Características do local onde está situado o domicílio", options=list(cod_local_domic_fam_options.keys()))
-        qtd_comodos_domic_fam = st.number_input('Quantidade de comodos do domicilio', min_value=0, max_value=30, value=4)
-        qtd_comodos_dormitorio_fam = st.number_input('Quantidade de comodos servindo como dormitório do domicilio', min_value=0, max_value=30, value=1)
-    with col2:
-        cod_material_piso_fam = st.selectbox("Material predominante no piso do domicílio", options=list(cod_material_piso_fam_options.keys()))
-        cod_material_domic_fam = st.selectbox("Material predominante nas paredes externas do domicílio", options=list(cod_material_domic_fam_options.keys()))
-        cod_agua_canalizada_fam = st.selectbox("Domicílio tem água encanada", options=list(cod_agua_canalizada_fam_options.keys()))
-        cod_abaste_agua_domic_fam = st.selectbox("Forma de abastecimento de água", options=list(cod_abaste_agua_domic_fam_options.keys()))
-        cod_banheiro_domic_fam = st.selectbox("Existência de banheiro", options=list(cod_banheiro_domic_fam_options.keys()))
-    with col3:
-        cod_destino_lixo_domic_fam = st.selectbox("Forma de coleta do lixo", options=list(cod_destino_lixo_domic_fam_options.keys()))
-        cod_iluminacao_domic_fam = st.selectbox("Tipo de iluminação", options=list(cod_iluminacao_domic_fam_options.keys()))
-        cod_calcamento_domic_fam = st.selectbox("Calçamento", options=list(cod_calcamento_domic_fam_options.keys()))
-        ind_familia_quilombola_fam = st.selectbox("Família quilombola", options=list(ind_familia_quilombola_fam_options.keys()))
-        qtde_pessoas = st.number_input('Quantidade de pessoas utilizada no cálculo da renda per capita familiar', min_value=0, max_value=30, value=4)
-
-
-    if st.button("Fazer Predição"):
-        modelo = joblib.load(model_path)
-
-        entrada = [[
-            classf_options[classf],
-            vlr_renda_media_fam,
-            cod_local_domic_fam_options[cod_local_domic_fam],
-            qtd_comodos_domic_fam,
-            qtd_comodos_dormitorio_fam,
-            cod_material_piso_fam_options[cod_material_piso_fam],
-            cod_material_domic_fam_options[cod_material_domic_fam],
-            cod_agua_canalizada_fam_options[cod_agua_canalizada_fam],
-            cod_abaste_agua_domic_fam_options[cod_abaste_agua_domic_fam],
-            cod_banheiro_domic_fam_options[cod_banheiro_domic_fam],
-            cod_destino_lixo_domic_fam_options[cod_destino_lixo_domic_fam],
-            cod_iluminacao_domic_fam_options[cod_iluminacao_domic_fam],
-            cod_calcamento_domic_fam_options[cod_calcamento_domic_fam],
-            ind_familia_quilombola_fam_options[ind_familia_quilombola_fam],
-            qtde_pessoas
-        ]]
-        predicao = modelo.predict(entrada)[0]
-        probas = modelo.predict_proba(entrada)[0]
-
-        st.success(f"Resultado da Predição: **{'Não apto a receber' if predicao == 0 else 'Apto a receber'}**")    
+        st.plotly_chart(fig_banheiro, use_container_width=True)  
 
 # Página 3 - Predição com ML reduzido
-if pagina == "Predição com ML (2)":
+if pagina == "Predição com ML":
     st.subheader("Predição com Modelo de Machine Learning")
 
     st.markdown("Preencha os dados abaixo para prever se tem acesso ou não ao Bolsa Família:")
