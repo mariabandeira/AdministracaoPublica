@@ -56,7 +56,7 @@ elif estado == "PB":
     geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-25-mun.json'
 
 # Dados
-cadunico = load_data(data_url, filename)
+cadunico = load_data(data_path, filename)
 cadunico = cadunico[cadunico['ano'].isin(range(2012, 2019))]
 geojson = requests.get(geojson_url).json()
 
@@ -445,4 +445,5 @@ if pagina == "Predição com ML":
 
 
         st.success(f"Resultado da Predição: **{'Não apto a receber' if predicao == 0 else 'Apto a receber'}**")
+
 
