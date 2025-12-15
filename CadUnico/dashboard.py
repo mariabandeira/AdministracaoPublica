@@ -11,6 +11,7 @@ import os
 from dotenv import load_dotenv
 from shapely.geometry import shape
 import gdown
+import unicodedata
 
 @st.cache_data
 def load_data(url, filename):
@@ -445,5 +446,6 @@ if pagina == "Predição com ML":
 
 
         st.success(f"Resultado da Predição: **{'Não apto a receber' if predicao == 0 else 'Apto a receber'}**")
+
 
 
