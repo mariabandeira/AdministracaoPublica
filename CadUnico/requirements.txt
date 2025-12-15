@@ -6,3 +6,4 @@ requests
 gdown
 streamlit-folium
 folium
+joblib
