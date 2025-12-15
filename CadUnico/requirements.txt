@@ -9,3 +9,4 @@ plotly
 shapely
 gdown
 python-dotenv
+xgboost
