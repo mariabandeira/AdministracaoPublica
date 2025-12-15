@@ -11,9 +11,16 @@ import os
 from dotenv import load_dotenv
 from shapely.geometry import shape
 import locale
+import gdown
 
 # Defina o locale para português do Brasil
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+
+@st.cache_data
+def load_data(url, filename):
+    if not os.path.exists(filename):
+        gdown.download(url, filename, quiet=False)
+    return pd.read_csv(filename, sep=';', low_memory=False, index_col=0)
 
 if 'cd_ibge_mapa' not in st.session_state:
     st.session_state['cd_ibge_mapa'] = None
@@ -45,13 +52,15 @@ estado = st.sidebar.selectbox("Selecione o estado", ["RN", "PB"])
 
 if estado == "RN":
     data_path = os.getenv("DATA_PATH_RN")
+    filename = "cadunico_RN.csv"
     geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-24-mun.json'
 elif estado == "PB":
     data_path = os.getenv("DATA_PATH_PB")
+    filename = "cadunico_PB.csv"
     geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-25-mun.json'
 
 # Dados
-cadunico = pd.read_csv(data_path, sep=';', low_memory=False)
+cadunico = load_data(data_url, filename)
 cadunico = cadunico[cadunico['ano'].isin(range(2012, 2019))]
 geojson = requests.get(geojson_url).json()
 
@@ -431,5 +440,6 @@ if pagina == "Predição com ML":
         ]]
         predicao = modelo.predict(entrada)[0]
         probas = modelo.predict_proba(entrada)[0]
+
 
         st.success(f"Resultado da Predição: **{'Não apto a receber' if predicao == 0 else 'Apto a receber'}**")
