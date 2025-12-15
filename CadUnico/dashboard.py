@@ -10,11 +10,7 @@ from shapely.geometry import shape, Point
 import os
 from dotenv import load_dotenv
 from shapely.geometry import shape
-import locale
 import gdown
-
-# Defina o locale para português do Brasil
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 @st.cache_data
 def load_data(url, filename):
@@ -64,9 +60,15 @@ cadunico = load_data(data_url, filename)
 cadunico = cadunico[cadunico['ano'].isin(range(2012, 2019))]
 geojson = requests.get(geojson_url).json()
 
+def normalize_str(s):
+    return ''.join(
+        c for c in unicodedata.normalize('NFD', s)
+        if unicodedata.category(c) != 'Mn'
+    ).lower()
+
 nomes_cidades = sorted(
     [feature['properties']['name'] for feature in geojson['features']],
-    key=locale.strxfrm
+    key=normalize_str
 )
 nomes_cidades.insert(0, "Todos os municípios")
 
@@ -443,3 +445,4 @@ if pagina == "Predição com ML":
 
 
         st.success(f"Resultado da Predição: **{'Não apto a receber' if predicao == 0 else 'Apto a receber'}**")
+
