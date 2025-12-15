@@ -1,9 +1,11 @@
 streamlit
-pandas
-numpy
-pyarrow
-requests
-gdown
 streamlit-folium
-folium
+pandas
 joblib
+altair
+folium
+requests
+plotly
+shapely
+gdown
+python-dotenv
