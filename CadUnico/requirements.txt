@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+pyarrow
+requests
+gdown
+streamlit-folium
+folium
