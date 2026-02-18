@@ -14,9 +14,14 @@ import gdown
 import unicodedata
 
 @st.cache_data
-def load_data(url, filename):
+def load_data(data_path, filename):
+    # Se data_path é um caminho local existente, usa diretamente
+    if os.path.exists(data_path):
+        return pd.read_csv(data_path, sep=';', low_memory=False, index_col=0)
+    
+    # Se é uma URL, faz o download
     if not os.path.exists(filename):
-        gdown.download(url, filename, quiet=False)
+        gdown.download(data_path, filename, quiet=False)
     return pd.read_csv(filename, sep=';', low_memory=False, index_col=0)
 
 if 'cd_ibge_mapa' not in st.session_state:
@@ -45,7 +50,7 @@ model_path_reduced = os.getenv("MODEL_PATH_REDUCED")
 
 # Seletor de estado
 st.sidebar.title("👪 Painel de Informações Bolsa Família")
-estado = st.sidebar.selectbox("Selecione o estado", ["RN", "PB"])
+estado = st.sidebar.selectbox("Selecione o estado", ["RN", "PB", "BA"])
 
 if estado == "RN":
     data_path = os.getenv("DATA_PATH_RN")
@@ -55,6 +60,10 @@ elif estado == "PB":
     data_path = os.getenv("DATA_PATH_PB")
     filename = "cadunico_PB.csv"
     geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-25-mun.json'
+elif estado == "BA":
+    data_path = os.getenv("DATA_PATH_BA")
+    filename = "cadunico_BA.csv"
+    geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-29-mun.json'
 
 # Dados
 cadunico = load_data(data_path, filename)
@@ -118,8 +127,13 @@ def get_centro_municipio(geojson, cd_ibge):
             geom = shape(feature['geometry'])
             lon, lat = geom.centroid.xy
             return [lat[0], lon[0]]
-    # Valor padrão (RN)
-    return [-7, -36.5]
+    # Valor padrão por estado
+    if estado == "BA":
+        return [-13, -55]
+    elif estado == "PB":
+        return [-7.5, -37]
+    else:  # RN
+        return [-7, -36.5]
 
 
 def exibir_mapa(cd_ibge=None):
@@ -134,7 +148,12 @@ def exibir_mapa(cd_ibge=None):
         centro = get_centro_municipio(geojson, cd_ibge)
         zoom = 10  # Ajuste o nível de zoom conforme necessário
     else:
-        centro = [-7, -36.5]
+        if estado == "BA":
+            centro = [-13, -55]
+        elif estado == "PB":
+            centro = [-7.5, -37]
+        else:  # RN
+            centro = [-7, -36.5]
         zoom = 7
 
     for feature in geojson_filtrado['features']:
@@ -446,6 +465,3 @@ if pagina == "Predição com ML":
 
 
         st.success(f"Resultado da Predição: **{'Não apto a receber' if predicao == 0 else 'Apto a receber'}**")
-
-
-
