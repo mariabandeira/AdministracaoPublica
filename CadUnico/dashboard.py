@@ -50,7 +50,7 @@ model_path_reduced = os.getenv("MODEL_PATH_REDUCED")
 
 # Seletor de estado
 st.sidebar.title("👪 Painel de Informações Bolsa Família")
-estado = st.sidebar.selectbox("Selecione o estado", ["RN", "PB", "BA"])
+estado = st.sidebar.selectbox("Selecione o estado", ["RN", "PB", "BA", "CE"])
 
 if estado == "RN":
     data_path = os.getenv("DATA_PATH_RN")
@@ -64,6 +64,10 @@ elif estado == "BA":
     data_path = os.getenv("DATA_PATH_BA")
     filename = "cadunico_BA.csv"
     geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-29-mun.json'
+elif estado == "CE":
+    data_path = os.getenv("DATA_PATH_CE")
+    filename = "cadunico_CE_clean.csv"
+    geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-23-mun.json'    
 
 # Dados
 cadunico = load_data(data_path, filename)
@@ -132,6 +136,8 @@ def get_centro_municipio(geojson, cd_ibge):
         return [-13, -55]
     elif estado == "PB":
         return [-7.5, -37]
+    elif estado == "CE":
+        return [-5.5, -39.5]
     else:  # RN
         return [-7, -36.5]
 
@@ -152,6 +158,8 @@ def exibir_mapa(cd_ibge=None):
             centro = [-13, -55]
         elif estado == "PB":
             centro = [-7.5, -37]
+        elif estado == "CE":
+            centro = [-5.5, -39.5]
         else:  # RN
             centro = [-7, -36.5]
         zoom = 7
