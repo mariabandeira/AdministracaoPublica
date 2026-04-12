@@ -4,6 +4,8 @@ cadunico_pb_rn_full.ipynb
 CadUnico/BasesRN/BasesAno/*
 CadUnico/BasesPB/BasesAno/*
 CadUnico/BasesBA/BasesAno/*
+CadUnico/BasesCE/BasesAno/*
 CadUnico/BasesRN/*.csv
 CadUnico/BasesPB/*.csv
 CadUnico/BasesBA/*.csv
+CadUnico/BasesCE/*.csv
