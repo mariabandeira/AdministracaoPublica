@@ -50,7 +50,7 @@ model_path_reduced = os.getenv("MODEL_PATH_REDUCED")
 
 # Seletor de estado
 st.sidebar.title("👪 Painel de Informações Bolsa Família")
-estado = st.sidebar.selectbox("Selecione o estado", ["RN", "PB", "BA", "CE"])
+estado = st.sidebar.selectbox("Selecione o estado", ["RN", "PB", "BA", "CE", "PI"])
 
 if estado == "RN":
     data_path = os.getenv("DATA_PATH_RN")
@@ -67,7 +67,11 @@ elif estado == "BA":
 elif estado == "CE":
     data_path = os.getenv("DATA_PATH_CE")
     filename = "cadunico_CE_clean.csv"
-    geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-23-mun.json'    
+    geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-23-mun.json'
+elif estado == "PI":
+    data_path = os.getenv("DATA_PATH_PI") or os.path.join(os.path.dirname(__file__), "BaesesPI", "cadunico_pi_clean.csv")
+    filename = "cadunico_PI_clean.csv"
+    geojson_url = 'https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-22-mun.json'    
 
 # Dados
 cadunico = load_data(data_path, filename)
@@ -101,7 +105,10 @@ selected_city = st.sidebar.selectbox(
     index=nomes_cidades.index(selected_city) if selected_city in nomes_cidades else 0,
     key="selected_city"
 )
-pagina = st.sidebar.radio("Selecione a página", ["Mapa e Indicadores", "Características Domiciliares", "Predição com ML"])
+pagina = st.sidebar.radio(
+    "Selecione a página",
+    ["Mapa e Indicadores", "Características Domiciliares", "Predição com ML", "Piauí - Visão Geral"]
+)
 
 if selected_city != "Todos os municípios":
     cd_ibge_selected_sidebar = next(
@@ -138,6 +145,8 @@ def get_centro_municipio(geojson, cd_ibge):
         return [-7.5, -37]
     elif estado == "CE":
         return [-5.5, -39.5]
+    elif estado == "PI":
+        return [-7.2, -42.7]
     else:  # RN
         return [-7, -36.5]
 
@@ -160,6 +169,8 @@ def exibir_mapa(cd_ibge=None):
             centro = [-7.5, -37]
         elif estado == "CE":
             centro = [-5.5, -39.5]
+        elif estado == "PI":
+            centro = [-7.2, -42.7]
         else:  # RN
             centro = [-7, -36.5]
         zoom = 7

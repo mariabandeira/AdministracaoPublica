@@ -1,0 +1,6 @@
+id_familia,data_referencia,numero_membros,renda_media,beneficiario_bolsa_familia
+1,2015-12-31,4,1500.00,1
+2,2015-12-31,3,1200.00,0
+3,2015-12-31,5,2000.00,1
+4,2015-12-31,2,800.00,0
+5,2015-12-31,6,2500.00,1

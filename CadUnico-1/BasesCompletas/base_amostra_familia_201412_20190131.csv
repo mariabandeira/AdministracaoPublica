@@ -1,0 +1,6 @@
+id_familia,ano,mes,qtde_pessoas,vlr_renda_media_fam,marc_pbf,cod_destino_lixo_domic_fam,cod_iluminacao_domic_fam,cod_calcamento_domic_fam,cod_abaste_agua_domic_fam,cod_escoa_sanitario_domic_fam,cod_especie_domic_fam
+1,2014,12,4,1500.00,1,1,1,1,1,1
+2,2014,12,3,1200.00,0,2,1,2,1,2
+3,2014,12,5,2000.00,1,1,2,1,2,1
+4,2014,12,2,800.00,0,3,1,3,1,3
+5,2014,12,6,2500.00,1,1,1,1,1,1
