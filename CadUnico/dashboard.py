@@ -105,10 +105,59 @@ selected_city = st.sidebar.selectbox(
     index=nomes_cidades.index(selected_city) if selected_city in nomes_cidades else 0,
     key="selected_city"
 )
+
 pagina = st.sidebar.radio(
     "Selecione a página",
     ["Mapa e Indicadores", "Características Domiciliares", "Predição com ML", "Piauí - Visão Geral"]
 )
+
+st.sidebar.markdown("""
+<style>
+.sidebar-footer-card {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 250px;
+}
+                    
+.logo-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.logo-card img {
+    width: 40px;
+    height: auto;
+}
+
+.footer-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.sidebar.markdown("""
+<div class="sidebar-footer-card">                    
+<div class="footer-title">Desenvolvimento</div><br>
+<div class="logo-card">
+    <img src="https://www.ufpb.br/aci/contents/imagens/diversos/logoufpb.png/@@images/8e95c80b-dae1-489d-b384-52e1d08f2d13.png">
+    <div>
+        <b>UFPB</b><br>
+        <small>Universidade Federal da Paraíba</small>
+    </div>
+</div>
+<div class="logo-card">
+    <img src="https://assecom.ufersa.edu.br/wp-content/uploads/sites/24/2014/09/PNG-bras%C3%A3o-Ufersa.png">
+    <div>
+        <b>UFERSA</b><br>
+        <small>Universidade Federal Rural do Semi-Árido</small>
+    </div>
+</div>
+</div>                    
+""", unsafe_allow_html=True)
 
 if selected_city != "Todos os municípios":
     cd_ibge_selected_sidebar = next(
@@ -484,3 +533,20 @@ if pagina == "Predição com ML":
 
 
         st.success(f"Resultado da Predição: **{'Não apto a receber' if predicao == 0 else 'Apto a receber'}**")
+
+st.markdown("""
+<style>
+.block-container {
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="main-footer", style="text-align: center; font-size: 16px;">
+    © 2025 Universidade Federal da Paraíba • Universidade Federal Rural do Semi-Árido • Todos os direitos reservados
+</div>
+""", unsafe_allow_html=True)
