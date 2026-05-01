@@ -28,20 +28,65 @@ if 'cd_ibge_mapa' not in st.session_state:
     st.session_state['cd_ibge_mapa'] = None
 
 st.markdown("""
-    <style>
-        .block-container {
-            padding-top: 4rem;
-            padding-bottom: 4rem;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            max-width: 100%;
-        }
-        .main {
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-    </style>
+<style>
+.block-container { padding-top: 4rem; padding-left: 2rem; padding-right: 2rem; max-width: 100%; }
+            
+.main { 
+    padding-left: 2rem; 
+    padding-right: 2rem; 
+}
+            
+.st-emotion-cache-1r1cntt {
+    padding-bottom: 0rem !important;
+}
+
+/* Entire sidebar */
+section[data-testid="stSidebar"] > div:first-child {
+    height: 100%;
+}
+
+/* Main sidebar block */
+section[data-testid="stSidebar"] .stVerticalBlock {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+            
+/* Main sidebar content */
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Footer pushed to bottom */
+.sidebar-footer-card {
+    margin-top: auto;
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+}
+
+/* Logo styling */
+.logo-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.logo-card img {
+    width: 42px;
+    height: auto;
+}
+
+.footer-title {
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+</style>
 """, unsafe_allow_html=True)
+
 
 
 load_dotenv()
@@ -110,34 +155,6 @@ pagina = st.sidebar.radio(
     "Selecione a página",
     ["Mapa e Indicadores", "Características Domiciliares", "Predição com ML", "Piauí - Visão Geral"]
 )
-
-st.sidebar.markdown("""
-<style>
-.sidebar-footer-card {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 250px;
-}
-                    
-.logo-card {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.logo-card img {
-    width: 40px;
-    height: auto;
-}
-
-.footer-title {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-</style>
-""", unsafe_allow_html=True)
 
 st.sidebar.markdown("""
 <div class="sidebar-footer-card">                    
